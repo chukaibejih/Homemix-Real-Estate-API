@@ -1,7 +1,7 @@
 databases:
   - name: homemix
     databaseName: homemix
-    user: postgres
+    user: homemix_user
 
 services:
   - type: web
