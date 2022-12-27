@@ -1,10 +1,12 @@
 databases:
   - name: homemix
+    plan: free
     databaseName: homemix
     user: homemix_user
 
 services:
   - type: web
+    plan: free
     name: Homemix
     env: python
     buildCommand: "./build.sh"
