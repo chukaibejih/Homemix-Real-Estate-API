@@ -45,6 +45,11 @@ INSTALLED_APPS = [
 
     # local apps
     'accounts.apps.AccountsConfig',
+
+    #3rd party apps
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +84,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Homemix.wsgi.application'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+       
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+   
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
