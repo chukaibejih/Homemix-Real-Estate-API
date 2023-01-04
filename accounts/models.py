@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.utils import timezone
 from accounts.manager import UserManager
 
 # Create your models here.
@@ -36,13 +37,21 @@ class User(AbstractUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name", "last_name", "role"]
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
     def __str__(self) -> str:
         return self.email
 
 
 class Property(models.Model):
+
+
+    class Status(models.TextChoices):
+        RENTED = 'rented', 'Rented',
+        SOLD = 'sold', 'Sold',
+        AVAILABLE = 'available', 'Available'
+
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="properties")
     address = models.CharField(max_length=200)
@@ -52,11 +61,23 @@ class Property(models.Model):
     property_type = models.CharField(max_length=50, choices=PROPERTY_TYPE_CHOICES)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     beds = models.PositiveIntegerField()
-    baths = models.DecimalField(max_digits=10, decimal_places=1)
+    baths = models.PositiveIntegerField()
     description = models.TextField(blank=True)
     image_urls = models.TextField(blank=True)
+    posted = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=9, choices=Status.choices, default=Status.AVAILABLE)
+
+
+    class Meta:
+        verbose_name = "Property"
+        verbose_name_plural = "Properties" 
+
+        ordering = ['-posted']
+        indexes = [
+            models.Index(fields=['-posted'])
+        ]
 
     def __str__(self):
         return f"{self.address}, {self.city}, {self.state}"
