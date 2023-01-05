@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from accounts.models import User
+from accounts.models import User, Property
 
 # User = get_user_model
 
@@ -76,5 +76,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
+class PropertySerializer(serializers.ModelSerializer):
+     class Meta:
+            model = Property
+            fields = ['__all__']
 
 
