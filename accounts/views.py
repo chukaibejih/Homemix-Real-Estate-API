@@ -31,3 +31,7 @@ class RegisterView(generics.GenericAPIView):
             "user": serializer.data,
             "tokens": tokens
         })        
+
+
+class RegisterView(generics.GenericAPIView):
+    pass
