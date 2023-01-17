@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # local apps
     'accounts.apps.AccountsConfig',
+    'listing.apps.ListingConfig',
 
     #3rd party apps
     'rest_framework',
