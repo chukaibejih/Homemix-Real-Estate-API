@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Property
+from .models import User
 
 # Register your models here.
 @admin.register(User)
@@ -9,9 +9,3 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ['email', 'first_name', 'last_name']
 
 
-@admin.register(Property)
-class PropertyAdmin(admin.ModelAdmin):
-    list_display = ['seller', 'city', 'state', 'property_type', 'price']
-    list_filter = ['status', 'city', 'state', 'property_type']
-    date_hierarchy = 'posted'
-    ordering = ['status', 'posted', 'price']

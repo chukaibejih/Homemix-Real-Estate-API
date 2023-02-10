@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from datetime import timedelta
 from dotenv import load_dotenv
 load_dotenv()
 import dj_database_url
@@ -30,7 +31,12 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 # ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8080',
+]
 
 
 # Application definition
@@ -51,6 +57,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'django_rest_passwordreset',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +76,7 @@ ROOT_URLCONF = 'Homemix.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,12 +94,18 @@ WSGI_APPLICATION = 'Homemix.wsgi.application'
 AUTH_USER_MODEL = 'accounts.User'
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-       
+    'DEFAULT_AUTHENTICATION_CLASSES': (       
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,
    
 }
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -149,6 +162,25 @@ USE_I18N = True
 
 USE_TZ = True
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'noreply@homemix.local'
+
+# Time in hours about how long the token is active
+DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 6
+
+# Return 200 even if the user doesn't exist in the database
+DJANGO_REST_PASSWORDRESET_NO_INFORMATION_LEAKAGE = True
+
+# Allow password reset for a user that does not have a usable password
+DJANGO_REST_MULTITOKENAUTH_REQUIRE_USABLE_PASSWORD = True
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=3),
+    'UPDATE_LAST_LOGIN': True,
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

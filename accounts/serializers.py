@@ -1,17 +1,33 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from accounts.models import User, Property
+from accounts.models import User
 
-# User = get_user_model
+
+class ConfirmEmailSerializer(serializers.ModelSerializer):
+    token = serializers.CharField(min_length=1, write_only=True)
+    uidb64 = serializers.CharField(min_length=1, write_only=True)
+
+    class Meta:
+        model = User
+        fields = ['token', 'uidb64']
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer): 
 
-    """Overide default token login to include user data"""
+    """Override default token login to include user data"""
 
     def validate(self, attrs):
         data = super().validate(attrs)
+        user = self.user
+        if not user.is_verified:
+            raise serializers.ValidationError({"error":"Email is not verified."})
+
         data.update(
             {
                 "id": self.user.id,
@@ -76,9 +92,5 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class PropertySerializer(serializers.ModelSerializer):
-     class Meta:
-            model = Property
-            fields = ['__all__']
 
 
