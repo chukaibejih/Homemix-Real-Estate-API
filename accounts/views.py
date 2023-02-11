@@ -20,6 +20,21 @@ User = get_user_model()
 
 
 class ConfirmEmailView(APIView):
+
+    """
+    ConfirmEmailView
+
+    This view is used to confirm the email of a user. It is a subclass of APIView and handles the GET request 
+    to confirm the email. The user's information is retrieved using the get_user_model() function and the 
+    serialization is done using the ConfirmEmailSerializer class. The view has no permission classes.
+
+    The view decodes the uidb64 and token passed in the request and retrieves the user information. 
+    If the user is found and the token is valid, the user's is_active and is_verified flags are set to 
+    True and the user information is saved. The view returns a success message on success. 
+    In case of an error, an error message is returned with a status code of 400.
+    """
+
+
     queryset = get_user_model().objects.all()
     serializer_class = ConfirmEmailSerializer
     permission_classes = []
@@ -43,6 +58,15 @@ class ConfirmEmailView(APIView):
 
 
 class ChangePasswordView(generics.CreateAPIView):
+
+    """
+    ChangePasswordView is a subclass of generics.CreateAPIView and is used for changing the password of a user.
+    It takes in the data for the old password and the new password, and validates the old password entered.
+    If the old password entered is incorrect, it returns an error message with a status code of 400.
+    If the old password is correct, it sets the new password and saves the changes to the user object.
+    It returns a success message with a status code of 200 upon successful password change.
+    """
+
     queryset = get_user_model().objects.all()
     serializer_class = ChangePasswordSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -68,6 +92,23 @@ class CustomTokenObtainPairViewSet(TokenObtainPairView):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+
+    """
+    UserViewSet is a ModelViewSet for handling User operations. It uses the UserSerializer for serializing and 
+    deserializing user data.
+
+    The default queryset for this viewset is all the users in the system. However, the viewset has been 
+    customized to restrict the queryset based on the requesting user's privilege level. If the user is a 
+    staff or a superuser, all users are returned. Otherwise, only active users are returned.
+
+    Additionally, the viewset implements custom serializer and permission classes based on the requested 
+    action. If the action is 'create', the RegisterSerializer will be used. If the action is 'destroy', 
+    the user must be both authenticated and an admin user.
+
+    Overall, the UserViewSet provides a convenient way to manage users while enforcing privilege and 
+    security restrictions.
+    """
+
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -88,27 +129,3 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.action == "destroy":
             return [permissions.IsAuthenticated(), permissions.IsAdminUser()]
         return super().get_permissions()
-
-
-# class RegisterView(generics.GenericAPIView):
-
-#     serializer_class = RegisterSerializer
-
-#     def post(self, request, *args, **kwargs):
-#         serializer = self.serializer_class(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         user = serializer.save()
-
-#         # Use the TokenObtainPairSerializer to generate the access and refresh tokens
-#         token_serializer = TokenObtainPairSerializer(data=request.data)
-#         token_serializer.is_valid(raise_exception=True)
-#         tokens = token_serializer.validated_data
-
-#         return Response({
-#             "user": serializer.data,
-#             "tokens": tokens
-#         })        
-
-
-# class RegisterView(generics.GenericAPIView):
-#     pass
