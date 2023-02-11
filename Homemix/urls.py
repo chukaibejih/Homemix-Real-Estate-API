@@ -23,14 +23,11 @@ from drf_yasg import openapi
 schema_view = swagger_get_schema_view(
    openapi.Info(
         title="Homemix Real Estate API",
-        default_version='v1',
+        default_version='1.0',
         description='''This real estate API allows users to search for properties with information 
                         about the property type, address, price, size, number of bedrooms and bathrooms, 
                         description, photos, availability, and contact information. The API is built using 
                         Python, Django and Django Rest Framework.''',
-        terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="info@homemix.com"),
-        license=openapi.License(name="BSD License"),
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),
