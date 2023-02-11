@@ -36,8 +36,7 @@ class ConfirmEmailView(APIView):
             user.is_verified = True
             user.save()
             return Response({"message": "Email confirmation successful"})
-        else:
-            return Response({"error": "Email confirmation failed"}, status=400)
+        return Response({"error": "Email confirmation failed"}, status=400)
 
 
 
