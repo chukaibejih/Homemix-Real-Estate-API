@@ -30,6 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 DEBUG = True
 
+# ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = ['homemix-api.onrender.com']
 # RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 # if RENDER_EXTERNAL_HOSTNAME: 

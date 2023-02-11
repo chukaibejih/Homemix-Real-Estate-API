@@ -8,7 +8,7 @@ class CustomPageNumberPagination(pagination.PageNumberPagination):
     page_size_query_param = "limit"  # items per page
 
 
-class PropertyViewSet(viewsets.ViewSet):
+class PropertyViewSet(viewsets.ModelViewSet):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
     permission_classes = [permissions.IsAuthenticated]

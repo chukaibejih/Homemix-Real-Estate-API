@@ -4,4 +4,21 @@ from . models import Property
 class PropertySerializer(serializers.ModelSerializer):
      class Meta:
             model = Property
-            fields = ['__all__']
+            fields = (
+               'id',
+               'seller',
+               'address',
+               'city',
+               'state',
+               'zip_code',
+               'property_type',
+               'price',
+               'beds',
+               'baths',
+               'description',
+               'image_urls',
+               'posted',
+               'created_at',
+               'updated_at',
+               'status',
+            )
