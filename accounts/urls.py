@@ -10,6 +10,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('confirm-email/<uidb64>/<str:token>/', ConfirmEmailView.as_view(), name='confirm-email'),
     path('login/', CustomTokenObtainPairViewSet.as_view(), name='token-obtain-pair'),
+    # path('logout/', CustomTokenDestroyView.as_view(), name='token-destroy'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
     path("reset-password/", include("django_rest_passwordreset.urls", namespace="password_reset")),
 ]

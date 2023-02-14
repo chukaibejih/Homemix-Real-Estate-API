@@ -30,8 +30,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 DEBUG = True
 
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['homemix-api.onrender.com']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['homemix-api.onrender.com']
 # RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 # if RENDER_EXTERNAL_HOSTNAME: 
 #     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -107,28 +107,39 @@ REST_FRAMEWORK = {
 }
 
 
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name':'Authorization',
+            'in':'header'
+        }
+    }
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #      'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-    #     'NAME': 'homemix',
+        'NAME': 'homemix',
 
-    #     'USER': 'postgres',
+        'USER': 'postgres',
 
-    #     'PASSWORD': '2000money',
+        'PASSWORD': '2000money',
 
-    #     'HOST': 'localhost',
+        'HOST': 'localhost',
 
-    #     'PORT': 5432,
-    # }
+        'PORT': 5432,
+    }
 
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'), 
-        conn_max_age=600    
-        )
+    # 'default': dj_database_url.config(
+    #     default=os.getenv('DATABASE_URL'), 
+    #     conn_max_age=600    
+    #     )
 }
 
 

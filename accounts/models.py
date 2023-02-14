@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from accounts.manager import UserManager
+from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your models here.
 
@@ -33,5 +34,11 @@ class User(AbstractUser, PermissionsMixin):
         return self.email
 
 
+# class Token(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     refresh_token = models.TextField()
 
+#     def save(self, *args, **kwargs):
+#         self.refresh_token = str(RefreshToken.for_user(self.user))
+#         super().save(*args, **kwargs)
 
