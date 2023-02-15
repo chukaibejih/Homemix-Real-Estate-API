@@ -14,6 +14,12 @@ Homemix is built with Django Rest Framework (DRF), a powerful and flexible frame
 
 With its advanced search and filtering capabilities, secure authentication, and support for multiple media types, Homemix is the ideal solution for anyone looking to buy or sell properties with ease.
 
+In addition to the features mentioned above, Homemix now also includes a referral system. Users can generate a unique referral code and share it with their friends or family. When a new user signs up using the referral code, both the referring user and the new user receive a reward or incentive.
+
+Users can view a list of all the users they have referred, providing transparency and accountability. This encourages existing users to invite others to the platform and helps to grow the user base.
+
+Overall, Homemix offers a comprehensive solution for buying and selling properties, with a user-friendly interface and advanced features to make the process as smooth and efficient as possible.
+
 Technical Overview
 ------------------
 
