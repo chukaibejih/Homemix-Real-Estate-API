@@ -5,7 +5,7 @@ from .models import User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['email', 'first_name', 'last_name', 'role']
+    list_display = ['email', 'first_name', 'last_name', 'role', 'referral_code']
     list_filter = ['premium', 'created_at', 'role']
     search_fields = ['email', 'first_name', 'last_name']
 

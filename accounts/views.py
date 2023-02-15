@@ -7,6 +7,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import smart_str
 from django.utils.http import urlsafe_base64_decode
+from .models import Referral
 
 from accounts.serializers import (
     RegisterSerializer,
@@ -14,10 +15,22 @@ from accounts.serializers import (
     UserSerializer,
     ChangePasswordSerializer,
     ConfirmEmailSerializer,
+    ReferralSerializer
     )
 
 
 User = get_user_model()
+
+
+class RetriveReferralView(generics.RetrieveAPIView):
+    queryset = Referral.objects.all()
+    serializer_class = ReferralSerializer
+
+    def get(self, request, referrer_id):
+        referrals = Referral.objects.filter(referrer=referrer_id)
+        referred_users = [referral.referred for referral in referrals]
+        serializer = UserSerializer(referred_users, many=True)
+        return Response(serializer.data)
 
 
 class ConfirmEmailView(APIView):
@@ -89,27 +102,6 @@ class ChangePasswordView(generics.CreateAPIView):
 
 class CustomTokenObtainPairViewSet(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
-
-    # def post(self, request, *args, **kwargs):
-    #     response = super().post(request, *args, **kwargs)
-    #     user = request.user
-    #     Token.objects.get_or_create(user=user)
-    #     return response
-
-
-# class CustomTokenDestroyView(GenericAPIView):
-#     permission_classes = [permissions.IsAuthenticated]
-
-#     def post(self, request):
-#         """Invalidate the user's current token."""
-#         user = request.user
-#         try:
-#             token = user.token
-#         except Token.DoesNotExist:
-#             return Response ({"message": "User has no token"}, status=status.HTTP_400_BAD_REQUEST)
-#         token.delete()
-#         return Response ({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
-
 
 
 

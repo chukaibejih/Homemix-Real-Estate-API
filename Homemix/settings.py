@@ -122,24 +122,24 @@ SWAGGER_SETTINGS = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    # 'default': {
+    #      'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'homemix',
+    #     'NAME': 'homemix',
 
-        'USER': 'postgres',
+    #     'USER': 'postgres',
 
-        'PASSWORD': '2000money',
+    #     'PASSWORD': '2000money',
 
-        'HOST': 'localhost',
+    #     'HOST': 'localhost',
 
-        'PORT': 5432,
-    }
+    #     'PORT': 5432,
+    # }
 
-    # 'default': dj_database_url.config(
-    #     default=os.getenv('DATABASE_URL'), 
-    #     conn_max_age=600    
-    #     )
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'), 
+        conn_max_age=600    
+        )
 }
 
 

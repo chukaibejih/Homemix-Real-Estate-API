@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from accounts.models import User
+from accounts.models import User, Referral
 
 
 class ConfirmEmailSerializer(serializers.ModelSerializer):
@@ -59,8 +59,24 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 
+class ReferralSerializer(serializers.ModelSerializer):
+    referrer = UserSerializer()
+    referred = UserSerializer()
+
+    class Meta:
+        model = Referral
+        fields = (
+            'id',
+            'referrer',
+            'referred',
+            'date_referred',
+        )
+
+
+
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=6)
+    referral_code = serializers.CharField(required=False)
 
     class Meta:
         model = User
@@ -69,8 +85,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             'email', 
             'first_name', 
             'last_name', 
+            'password', 
             'role', 
-            'password',            
+            'referral_code',
+                       
         )
 
         extra_kwargs = {
@@ -81,15 +99,31 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
+        # Get the referral code from the request data
+        referral_code = validated_data.pop('referral_code', None)
+
+        # Create the user object
         user = User.objects.create_user(
-        validated_data['email'],
-        validated_data['password'],
-        first_name=validated_data['first_name'],
-        last_name=validated_data['last_name'],
-        role=validated_data['role'],
-    )
+            validated_data['email'],
+            validated_data['password'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            role=validated_data['role'],
+        )
+
+        # if referral code is provided, associate the user with the referrer 
+        if referral_code:
+            try:
+                # Get the referrer user object 
+                referrer = User.objects.get(referral_code=referral_code)
+
+                # Associate the referred user with the referrer 
+                Referral.objects.create(referrer=referrer, referred=user)
+            except User.DoesNotExist:
+                pass
 
         return user
+        
 
 
 
