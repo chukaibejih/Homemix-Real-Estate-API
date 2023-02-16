@@ -1,5 +1,6 @@
 from rest_framework import viewsets, pagination, permissions
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle 
 from .models import Property
 from .serializers import PropertySerializer
 
@@ -15,3 +16,4 @@ class PropertyViewSet(viewsets.ModelViewSet):
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['address', 'city', 'state', 'zip_code', 'property_type']
     pagination_class = CustomPageNumberPagination
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]

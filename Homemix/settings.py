@@ -30,8 +30,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 DEBUG = True
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['homemix-api.onrender.com']
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['homemix-api.onrender.com']
 # RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 # if RENDER_EXTERNAL_HOSTNAME: 
 #     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -101,6 +101,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '10/minute',
+        'user': '20/minute'
+    },
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5,
    

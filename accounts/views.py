@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from rest_framework import generics, viewsets, permissions, status
 from rest_framework.views import APIView
-from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle 
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import smart_str
 from django.utils.http import urlsafe_base64_decode
@@ -25,6 +25,7 @@ User = get_user_model()
 class RetriveReferralView(generics.RetrieveAPIView):
     queryset = Referral.objects.all()
     serializer_class = ReferralSerializer
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
     def get(self, request, referrer_id):
         referrals = Referral.objects.filter(referrer=referrer_id)
@@ -52,6 +53,7 @@ class ConfirmEmailView(APIView):
     queryset = get_user_model().objects.all()
     serializer_class = ConfirmEmailSerializer
     permission_classes = []
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
     def get(self, request, uidb64, token, *args, **kwargs):
         try:
@@ -83,6 +85,7 @@ class ChangePasswordView(generics.CreateAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = ChangePasswordSerializer
     permission_classes = [permissions.IsAuthenticated]
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -102,7 +105,7 @@ class ChangePasswordView(generics.CreateAPIView):
 
 class CustomTokenObtainPairViewSet(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
-
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -126,6 +129,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
     def get_queryset(self):
         if self.request.user.is_staff or self.request.user.is_superuser:
