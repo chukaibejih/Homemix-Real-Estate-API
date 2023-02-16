@@ -4,6 +4,9 @@ Homemix - A Real Estate API (This project is still a work in progress).
 
 Homemix is a RESTful API that enables users to buy and sell properties with ease. It provides endpoints for CRUD operations on real estate listings, making it simple for users to create, read, update, and delete listings.
 
+Features Explained
+------------------
+
 With Homemix, users can list properties with detailed information, including property type, address, price, size, number of bedrooms and bathrooms, description, photos, availability, and contact information. This makes it easy for potential buyers to search for properties that meet their specific needs and requirements.
 
 Homemix also provides advanced search and filtering capabilities, allowing users to search for properties based on parameters such as location, price, number of bedrooms, and more. The API supports pagination for large datasets, with customizable page size and page number parameters, making it easy to view large amounts of data.
@@ -33,6 +36,15 @@ The platform uses the following technologies to gather and display the pricing d
 -   Serialization of data using DRF's serializers
 -   Supports pagination of results using DRF's built-in pagination classes
 -   Provides documentation of the API using drf-yasg - Yet Another Swagger Generator. 
+
+Security Layers
+------------------
+- ALLOWED_HOSTS.
+- CORS_ALLOWED_ORIGINS.
+- Authentication.
+- Authorization.
+- Throttling - User-based request rate limiting. 
+- Implemented request validation and filtering - Serialization of data.
 
 Why Homemix?
 --------
