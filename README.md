@@ -4,6 +4,7 @@ Homemix - A Real Estate API (This project is still a work in progress).
 
 Homemix is a RESTful API that enables users to buy and sell properties with ease. It provides endpoints for CRUD operations on real estate listings, making it simple for users to create, read, update, and delete listings.
 
+
 Features Explained
 ------------------
 
@@ -23,6 +24,7 @@ Users can view a list of all the users they have referred, providing transparenc
 
 Overall, Homemix offers a comprehensive solution for buying and selling properties, with a user-friendly interface and advanced features to make the process as smooth and efficient as possible.
 
+
 Technical Overview
 ------------------
 
@@ -37,14 +39,17 @@ The platform uses the following technologies to gather and display the pricing d
 -   Supports pagination of results using DRF's built-in pagination classes
 -   Provides documentation of the API using drf-yasg - Yet Another Swagger Generator. 
 
+
 Security Layers
 ------------------
+
 - ALLOWED_HOSTS.
 - CORS_ALLOWED_ORIGINS.
 - Authentication.
 - Authorization.
-- Throttling - User-based request rate limiting. 
+- API throttling - User-based request rate limiting. 
 - Implemented request validation and filtering - Serialization of data.
+
 
 Why Homemix?
 --------
@@ -56,6 +61,7 @@ I saw an opportunity to use my skills in software development to build an API th
 The project holds a special place in my heart because it allows me to give back to my parents and the real estate community. I am passionate about creating a clean, well-secured API that will make a positive impact on the industry. I believe that the features and capabilities offered by Homemix will greatly benefit both buyers and sellers, and I am excited to see the impact it will have.
 
 In short, Homemix is a project that brings together my passion for real estate and my skills in software development. I am confident that it will make a positive difference in the industry and I look forward to seeing it grow and evolve over time.
+
 
 Installation
 ------------
@@ -100,6 +106,22 @@ Here are the steps to install and set up the Homemix real estate API project loc
     ```
   
   The Homemix API should now be running at http://localhost:8000/. You can access the Django admin interface at http://localhost:8000/admin/.
+  
+  
+Running Unit Tests
+------------
+
+After making any changes to the code, it's important to run the unit tests to ensure everything is working correctly. To run the tests, follow these steps:
+
+1. Open a terminal or command prompt in the project directory.
+2. Enter the following command to run the tests:
+
+     ```bash
+    python manage.py tests
+    ```
+3. Wait for the tests to complete. If any tests fail, you will see an error message in the terminal.
+4. Make sure that all tests are passing before pushing any changes to the codebase.
+   
   
 Contributing / Reporting issues
 ------------
