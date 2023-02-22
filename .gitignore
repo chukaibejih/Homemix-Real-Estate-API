@@ -1,3 +1,4 @@
 .env
 db.sqlite3
 virtual
+warning.log

@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view as swagger_get_schema_view 
@@ -28,6 +28,8 @@ schema_view = swagger_get_schema_view(
                         about the property type, address, price, size, number of bedrooms and bathrooms, 
                         description, photos, availability, and contact information. The API is built using 
                         Python, Django and Django Rest Framework.''',
+        contact=openapi.Contact(name="Chukwuka Ibejih", email="chukaibejih@gmail.com"),
+        license=openapi.License(name="MIT license"),
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),
@@ -39,4 +41,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema"),
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

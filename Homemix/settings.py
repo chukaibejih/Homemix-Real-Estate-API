@@ -32,9 +32,6 @@ DEBUG = True
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['homemix-api.onrender.com']
-# RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-# if RENDER_EXTERNAL_HOSTNAME: 
-#     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 CORS_ALLOWED_ORIGINS = ["*"]
 
@@ -93,6 +90,11 @@ WSGI_APPLICATION = 'Homemix.wsgi.application'
 
 AUTH_USER_MODEL = 'accounts.User'
 
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SECURE=True
+
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (       
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -113,6 +115,29 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 5,
    
 }
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'warning.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+        },
+         'custom_logger': {
+            'handlers': ['file'],
+            'level': 'INFO',
+        }
+    },
+}
+
 
 
 SWAGGER_SETTINGS = {

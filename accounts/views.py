@@ -18,6 +18,10 @@ from accounts.serializers import (
     ReferralSerializer
     )
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 User = get_user_model()
 
@@ -106,6 +110,11 @@ class ChangePasswordView(generics.CreateAPIView):
 class CustomTokenObtainPairViewSet(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
     throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    logger = logging.getLogger('custom_logger')
+
+    def post(self, request, *args, **kwargs):
+        self.logger.info(f"{request.data['email']} logged in")
+        return super().post(request, *args, **kwargs)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -130,6 +139,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
     throttle_classes = [UserRateThrottle, AnonRateThrottle]
+    logger = logging.getLogger('custom_logger')
 
     def get_queryset(self):
         if self.request.user.is_staff or self.request.user.is_superuser:
@@ -147,3 +157,23 @@ class UserViewSet(viewsets.ModelViewSet):
         if self.action == "destroy":
             return [permissions.IsAuthenticated(), permissions.IsAdminUser()]
         return super().get_permissions()
+
+    def list(self, request, *args, **kwargs):
+        self.logger.info(f"UserViewSet - User list requested by {request.user}")
+        return super().list(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        self.logger.debug(f"UserViewSet - User details requested by {request.user}")
+        return super().retrieve(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        self.logger.info(f"UserViewSet - {request.data['email']} created by {request.user}")
+        return super().create(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        self.logger.info(f"UserViewSet - {request.data['email']} updated by {request.user}")
+        return super().update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        self.logger.warning(f"UserViewSet - {self.get_object()} deleted by {request.user}")
+        return super().destroy(request, *args, **kwargs)
