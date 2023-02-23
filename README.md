@@ -4,6 +4,9 @@ Homemix - A Real Estate API (This project is still a work in progress).
 
 Homemix is a RESTful API that enables users to buy and sell properties with ease. It provides endpoints for CRUD operations on real estate listings, making it simple for users to create, read, update, and delete listings.
 
+- URL: https://homemix-api.onrender.com
+- Documentaion - https://homemix-api.onrender.com/redoc/
+
 
 Features Explained
 ------------------
