@@ -39,7 +39,6 @@ class RetriveReferralView(generics.RetrieveAPIView):
 
 
 class ConfirmEmailView(APIView):
-
     """
     ConfirmEmailView
 
@@ -53,25 +52,25 @@ class ConfirmEmailView(APIView):
     In case of an error, an error message is returned with a status code of 400.
     """
 
-
     queryset = get_user_model().objects.all()
     serializer_class = ConfirmEmailSerializer
     permission_classes = []
     throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
-    def get(self, request, uidb64, token, *args, **kwargs):
+    def get(self, request, uidb64, token):
         try:
             uid = smart_str(urlsafe_base64_decode(uidb64))
-            user = get_user_model().objects(pk=uid)
-        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-            user = None
+            user = get_user_model().objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, get_user_model().DoesNotExist):
+            return Response({"error": "Invalid user ID"}, status=400)
 
-        if user is None and default_token_generator.check_token(user, token):
+        if default_token_generator.check_token(user, token):
             user.is_active = True
             user.is_verified = True
             user.save()
             return Response({"message": "Email confirmation successful"})
-        return Response({"error": "Email confirmation failed"}, status=400)
+        else:
+            return Response({"error": "Invalid token"}, status=400)
 
 
 

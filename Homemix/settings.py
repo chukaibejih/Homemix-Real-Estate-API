@@ -33,7 +33,7 @@ DEBUG = True
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['homemix-api.onrender.com']
 
-CORS_ALLOWED_ORIGINS = ["*"]
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
