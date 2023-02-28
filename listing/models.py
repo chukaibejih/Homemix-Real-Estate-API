@@ -6,7 +6,7 @@ from accounts.models import User
 
 PROPERTY_TYPE_CHOICES = (
     ("residential property", "Residential Property"),
-    ("Commercial property", "Commercial Property"),
+    ("commercial property", "Commercial Property"),
     ("Industrial property", "Industrial Property"),
     ("agricultural property", "Agricultural Property"),
     ("recreational property", "Recreational Property"),

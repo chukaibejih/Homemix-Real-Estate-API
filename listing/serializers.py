@@ -22,3 +22,7 @@ class PropertySerializer(serializers.ModelSerializer):
                'updated_at',
                'status',
             )
+            extra_kwargs = {
+         "seller": {"read_only": True},
+      }
+         

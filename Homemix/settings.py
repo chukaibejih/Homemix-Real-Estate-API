@@ -26,12 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 DEBUG = True
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['homemix-api.onrender.com']
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['homemix-api.onrender.com']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -159,24 +157,24 @@ SWAGGER_SETTINGS = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    # 'default': {
+    #      'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'homemix',
+    #     'NAME': 'homemix',
 
-        'USER': 'postgres',
+    #     'USER': 'postgres',
 
-        'PASSWORD': '2000money',
+    #     'PASSWORD': '2000money',
 
-        'HOST': 'localhost',
+    #     'HOST': 'localhost',
 
-        'PORT': 5432,
-    }
+    #     'PORT': 5432,
+    # }
 
-    # 'default': dj_database_url.config(
-    #     default=os.getenv('DATABASE_URL'), 
-    #     conn_max_age=600    
-    #     )
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'), 
+        conn_max_age=600    
+        )
 }
 
 
@@ -211,14 +209,8 @@ USE_I18N = True
 USE_TZ = True
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
-ANYMAIL = {
-
-    "MAILJET_API_KEY" : os.getenv('MJ_APIKEY_PUBLIC'),
-    "MAILJET_SECRET_KEY" : os.getenv('MJ_APIKEY_PRIVATE'),
-}
-DEFAULT_FROM_EMAIL = 'chukwukaibejih@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'noreply@homemix.local'
 
 # Time in hours about how long the token is active
 DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 6
