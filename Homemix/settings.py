@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_rest_passwordreset',
     'corsheaders',
-    'anymail',
 ]
 
 MIDDLEWARE = [
