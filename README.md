@@ -28,6 +28,18 @@ Users can view a list of all the users they have referred, providing transparenc
 Overall, Homemix offers a comprehensive solution for buying and selling properties, with a user-friendly interface and advanced features to make the process as smooth and efficient as possible.
 
 
+Why Homemix?
+--------
+
+The creation of Homemix is a personal project for me as it has roots in my family's background in the real estate industry. Growing up, my parents ran a traditional real estate business and I have always wanted to create something that would solve some of the problems they faced and make their work easier.
+
+I saw an opportunity to use my skills in software development to build an API that would streamline the process of buying and selling properties. With Homemix, I aim to provide users with an intuitive and user-friendly platform that makes it easy to list properties and search for properties that meet their needs.
+
+The project holds a special place in my heart because it allows me to give back to my parents and the real estate community. I am passionate about creating a clean, well-secured API that will make a positive impact on the industry. I believe that the features and capabilities offered by Homemix will greatly benefit both buyers and sellers, and I am excited to see the impact it will have.
+
+In short, Homemix is a project that brings together my passion for real estate and my skills in software development. I am confident that it will make a positive difference in the industry and I look forward to seeing it grow and evolve over time.
+
+
 Technical Overview
 ------------------
 
@@ -54,16 +66,10 @@ Security Layers
 - Implemented request validation and filtering - Serialization of data.
 
 
-Why Homemix?
---------
+Sending Emails
+------------------
 
-The creation of Homemix is a personal project for me as it has roots in my family's background in the real estate industry. Growing up, my parents ran a traditional real estate business and I have always wanted to create something that would solve some of the problems they faced and make their work easier.
-
-I saw an opportunity to use my skills in software development to build an API that would streamline the process of buying and selling properties. With Homemix, I aim to provide users with an intuitive and user-friendly platform that makes it easy to list properties and search for properties that meet their needs.
-
-The project holds a special place in my heart because it allows me to give back to my parents and the real estate community. I am passionate about creating a clean, well-secured API that will make a positive impact on the industry. I believe that the features and capabilities offered by Homemix will greatly benefit both buyers and sellers, and I am excited to see the impact it will have.
-
-In short, Homemix is a project that brings together my passion for real estate and my skills in software development. I am confident that it will make a positive difference in the industry and I look forward to seeing it grow and evolve over time.
+This project currently use django.core.mail module and console email backend. You can change it to your prefered email backend.
 
 
 Installation
