@@ -25,7 +25,7 @@ In addition to the features mentioned above, Homemix now also includes a referra
 
 Users can view a list of all the users they have referred, providing transparency and accountability. This encourages existing users to invite others to the platform and helps to grow the user base.
 
-Overall, Homemix offers a comprehensive solution for buying and selling properties, with a user-friendly interface and advanced features to make the process as smooth and efficient as possible.
+Overall, Homemix offers a comprehensive solution for buying and selling properties, with a user-friendly interface and advanced features to make the process run  as smoothly and efficiently as possible.
 
 
 Why Homemix?
