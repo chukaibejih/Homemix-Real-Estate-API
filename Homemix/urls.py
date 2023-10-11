@@ -26,7 +26,7 @@ schema_view = swagger_get_schema_view(
         default_version='1.0',
         description='''Welcome to Homemix, a powerful and flexible Real Estate API that enables users to buy and sell properties with ease. Homemix is a RESTful API that provides endpoints for CRUD operations on real estate listings, making it simple for users to create, read, update, and delete listings.
 
-Homemix offers a comprehensive solution for buying and selling properties, with advanced search and filtering capabilities, secure authentication, and support for multiple media types. With detailed information on property type, address, price, size, number of bedrooms and bathrooms, description, photos, availability, and contact information, Homemix makes it easy for potential buyers to search for properties that meet their specific needs and requirements.
+Homemix offers a comprehensive solution when  it comes to buying and selling properties, with advanced search and filtering capabilities, secure authentication, and support for multiple media types. With detailed information on property type, address, price, size, number of bedrooms and bathrooms, description, photos, availability, and contact information, Homemix makes it easy for potential buyers to search for properties that meet their specific needs and requirements.
 
 In addition to these features, Homemix now also includes a referral system, providing a unique way for users to invite others to the platform and receive rewards or incentives. Homemix is built with Django Rest Framework (DRF), a powerful and flexible framework for building APIs in Django. This makes it easy to extend and customize the API to meet specific needs, and provides comprehensive documentation and examples to get you started quickly.
 
